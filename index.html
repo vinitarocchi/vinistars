@@ -65,7 +65,7 @@
         }
 
         .card[style*="background-image"], .card.board-face-down, .back-card, .gallery-card, .home-art-img {
-            filter: saturate(1.5) contrast(1.2);
+            filter: saturate(1) contrast(1.2);
         }
 
         /* --- CABEÇALHO --- */
@@ -426,7 +426,15 @@
         .central-pair .card { pointer-events: auto; transform: none; }
 
         .linear-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        #scrContainer .card, #csmdContainer .card, #duplaContainer .card, #oposicaoContainer .card { --card-w: calc(14 * var(--u)); --card-h: calc(24.3 * var(--u)); font-size: calc(2.4 * var(--u)); }
+        
+        /* Aumento de 20% sobre o tamanho anterior para CSMD */
+        #csmdContainer .card { 
+            --card-w: calc(20.16 * var(--u)); 
+            --card-h: calc(34.99 * var(--u)); 
+            font-size: calc(3.45 * var(--u)); 
+        }
+
+        #scrContainer .card, #oposicaoContainer .card { --card-w: calc(14 * var(--u)); --card-h: calc(24.3 * var(--u)); font-size: calc(2.4 * var(--u)); }
         #oposicaoScrContainer .card { --card-w: calc(11 * var(--u)); --card-h: calc(19 * var(--u)); font-size: calc(2.2 * var(--u)); }
         #taContainer .card, #daviContainer .card { --card-w: calc(11 * var(--u)); --card-h: calc(19 * var(--u)); font-size: calc(2.2 * var(--u)); }
         #futebolContainer { --card-w: calc(9.3 * var(--u)); --card-h: calc(16.1 * var(--u)); }
@@ -439,7 +447,6 @@
         .board.game-active.futebol-active #futebolContainer { --card-w: calc(7.6 * var(--u)); --card-h: calc(13.1 * var(--u)); }
         .board.game-active.futebol-active #futebolContainer .card { font-size: calc(1.5 * var(--u)); }
         .board.futebol-active ~ #gamePanel .game-grid .back-card { width: 42px !important; height: 73px !important; }
-        .dupla-active .back-card, #duplaContainer .back-card { width: calc(14 * var(--u)); height: calc(24.3 * var(--u)); }
 
         .linear-row { display: flex; gap: calc(6 * var(--u)); }
         .linear-col { display: flex; flex-direction: column; align-items: center; }
@@ -461,7 +468,6 @@
         .board.scr-active #scrContainer { display: flex !important; }
         .board.csmd-active #csmdContainer { display: flex !important; }
         .board.ta-active #taContainer { display: flex !important; }
-        .board.dupla-active #duplaContainer { display: flex !important; }
         .board.davi-active #daviContainer { display: flex !important; }
         .board.oposicao-active #oposicaoContainer { display: flex !important; }
         .board.oposicao-scr-active #oposicaoScrContainer { display: flex !important; }
@@ -552,9 +558,6 @@
                 <div class="action-form">
                     <select id="gameSelect" class="game-select">
                         <option value="" disabled selected>Escolha seu jogo...</option>
-                        <optgroup label="Sorteios Rápidos">
-                            <option value="dupla">Tirar uma Dupla</option>
-                        </optgroup>
                         <optgroup label="Leituras de Oposição">
                             <option value="oposicao">Oposição</option>
                             <option value="oposicaoScr">Oposição de SCR</option>
@@ -688,19 +691,6 @@
                         <div class="card linear-card" data-oposcr-slot="b-m3" onclick="selectCard(this)">Maior</div>
                         <div class="card linear-card minor-card-gap" data-oposcr-slot="b-me3" onclick="selectCard(this)">Menor</div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="duplaContainer" class="linear-container">
-            <div class="linear-row">
-                <div class="linear-col">
-                    <span class="slot-label">Arcano Maior</span>
-                    <div class="card linear-card" data-dupla-slot="1" onclick="selectCard(this)">1 Maior</div>
-                </div>
-                <div class="linear-col">
-                    <span class="slot-label">Arcano Menor</span>
-                    <div class="card linear-card" data-dupla-slot="2" onclick="selectCard(this)">2 Menor</div>
                 </div>
             </div>
         </div>
@@ -871,30 +861,37 @@
                         <span class="slot-label">1: Força do Time</span>
                         <div class="temple-row-pair">
                             <div class="card linear-card" data-futebol-slot="1" onclick="selectCard(this)">1 Maior</div>
-                            <div class="card linear-card" data-futebol-slot="8" onclick="selectCard(this)">8 Menor</div>
+                            <div class="card linear-card" data-futebol-slot="9" onclick="selectCard(this)">9 Menor</div>
                         </div>
                     </div>
                     <div class="linear-col">
                         <span class="slot-label">2: Ataque do Time</span>
                         <div class="temple-row-pair">
                             <div class="card linear-card" data-futebol-slot="2" onclick="selectCard(this)">2 Maior</div>
-                            <div class="card linear-card" data-futebol-slot="9" onclick="selectCard(this)">9 Menor</div>
+                            <div class="card linear-card" data-futebol-slot="10" onclick="selectCard(this)">10 Menor</div>
                         </div>
                     </div>
                     <div class="linear-col">
                         <span class="slot-label">3: Defesa do Time</span>
                         <div class="temple-row-pair">
                             <div class="card linear-card" data-futebol-slot="3" onclick="selectCard(this)">3 Maior</div>
-                            <div class="card linear-card" data-futebol-slot="10" onclick="selectCard(this)">10 Menor</div>
+                            <div class="card linear-card" data-futebol-slot="11" onclick="selectCard(this)">11 Menor</div>
                         </div>
                     </div>
                 </div>
                 <div class="futebol-col">
                     <div class="linear-col">
-                        <span class="slot-label">7: Resultado</span>
+                        <span class="slot-label">7: Adversário</span>
                         <div class="temple-row-pair">
                             <div class="card linear-card" data-futebol-slot="7" onclick="selectCard(this)">7 Maior</div>
-                            <div class="card linear-card" data-futebol-slot="14" onclick="selectCard(this)">14 Menor</div>
+                            <div class="card linear-card" data-futebol-slot="15" onclick="selectCard(this)">15 Menor</div>
+                        </div>
+                    </div>
+                    <div class="linear-col">
+                        <span class="slot-label">8: Resultado</span>
+                        <div class="temple-row-pair">
+                            <div class="card linear-card" data-futebol-slot="8" onclick="selectCard(this)">8 Maior</div>
+                            <div class="card linear-card" data-futebol-slot="16" onclick="selectCard(this)">16 Menor</div>
                         </div>
                     </div>
                 </div>
@@ -903,21 +900,21 @@
                         <span class="slot-label">4: Fluxo na Partida</span>
                         <div class="temple-row-pair">
                             <div class="card linear-card" data-futebol-slot="4" onclick="selectCard(this)">4 Maior</div>
-                            <div class="card linear-card" data-futebol-slot="11" onclick="selectCard(this)">11 Menor</div>
+                            <div class="card linear-card" data-futebol-slot="12" onclick="selectCard(this)">12 Menor</div>
                         </div>
                     </div>
                     <div class="linear-col">
                         <span class="slot-label">5: Sorte do Time</span>
                         <div class="temple-row-pair">
                             <div class="card linear-card" data-futebol-slot="5" onclick="selectCard(this)">5 Maior</div>
-                            <div class="card linear-card" data-futebol-slot="12" onclick="selectCard(this)">12 Menor</div>
+                            <div class="card linear-card" data-futebol-slot="13" onclick="selectCard(this)">13 Menor</div>
                         </div>
                     </div>
                     <div class="linear-col">
                         <span class="slot-label">6: Está Próximo a Vencer?</span>
                         <div class="temple-row-pair">
                             <div class="card linear-card" data-futebol-slot="6" onclick="selectCard(this)">6 Maior</div>
-                            <div class="card linear-card" data-futebol-slot="13" onclick="selectCard(this)">13 Menor</div>
+                            <div class="card linear-card" data-futebol-slot="14" onclick="selectCard(this)">14 Menor</div>
                         </div>
                     </div>
                 </div>
@@ -1020,7 +1017,7 @@
         const btnVoltar = document.getElementById('btnVoltar');
         const postGameControls = document.getElementById('postGameControls'); 
 
-        const baseUrl = 'https://marycusack.com/Decks/Images/Tarot/O/OldStyle/';
+        const baseUrl = 'https://marycusack.com/Decks/Images/Tarot/R/Radiant/';
         
         const majorNames = [
             "0 - O Louco", "1 - O Mago", "2 - A Sacerdotisa", "3 - A Imperatriz", 
@@ -1143,7 +1140,7 @@
                 explicacao: "Traz uma energia sutil de renovação e cura, sintonizando as emoções com a esperança genuína e com o reatamento harmonioso dos laços. Representa o brilho pessoal, a fé no futuro e os processos de cura ou evolução contínua.",
                 exemplo: "Iniciar uma conversa leve e sincera com o parceiro que resulta na cura de mágoas e no fortalecimento do afeto mútuo. Apresentar uma nova perspectiva ou projeto acreditando genuinamente no sucesso dele a longo prazo.",
                 metodoEuropeu: [
-                    { comb: "Três de Copas", texto: "A energia de esperança e renovação encontra o clima de celebração e união. Sugere uma evolução afetiva significativa e harmoniosa, onde os sentimentos são compartilhados e festejados socialmente. A Estrela ilumina o caminho com esperança e cura. O Três de Copas dá o 'jeito festivo e social' de vivenciar esse momento feliz." },
+                    { comb: "Três de Copas", texto: "A energia de esperança e renovação encontra o clima de celebration e união. Sugere uma evolução afetiva significativa e harmoniosa, onde os sentimentos são compartilhados e festejados socialmente. A Estrela ilumina o caminho com esperança e cura. O Três de Copas dá o 'jeito festivo e social' de vivenciar esse momento feliz." },
                     { comb: "Cinco de Paus", texto: "A energia de manter as esperanças encontra a agitação das pequenas disputas cotidianas. O conselho é manter as expectativas positivas, mas sem perder o foco na resolução minuciosa de cada pequeno detalhe do dia a dia. A Estrela aponta para o horizonte ideal. O Cinco de Paus rotula o 'jeito atento às picuinhas e pormenores' necessários para que o plano funcione." },
                     { comb: "Rei de Copas", texto: "A energia de esperança e cura encontra a generosidade e maturidade emocional. O conselho é canalizar suas energias para atividades sociais, momentos de lazer com amigos e processos de cura, deixando o foco nos problemas afetivos de lado. A Estrela aponta para a renovação e a restauração da paz. O Rei de Copas confere o 'jeito acolhedor e maduro' de vivenciar os momentos de lazer." }
                 ]
@@ -1311,7 +1308,7 @@
                 atributos: "Exaustivo, lento, repetitivo.",
                 explicacao: "Uma rotina operacional densa, repetitiva e cansativa que exige resiliência diária na execução, mas sem apresentar grandes novidades na estrutura.",
                 exemplo: "Passar os dias executando as mesmas tarefas exaustivas de sempre no piloto automático.",
-                conselho: "[Paciência, moderação, lentidão, cura pelo tempo] Recomenda desacelerar o ritmo, agir com equilíbrio e permitir que os processos amadureçam naturalmente. Exemplo Prático: Avançar em um plano profissional passo a passo, sem tentar queimar etapas por ansiedade.",
+                conselho: "[Paciência, moderação, lentidão, cura pelo tempo] Recomenda desacelerar o ritmo, agir com equilíbrio e permitir que processes amadureçam naturalmente. Exemplo Prático: Avançar em um plano profissional passo a passo, sem tentar queimar etapas por ansiedade.",
                 metodoEuropeu: [
                     { comb: "Nove de Paus", texto: "A energia de moderação e tempo encontra a postura defensiva baseada na bagagem adquirida. O conselho é avançar de forma extremamente lenta, usando as experiências e erros do passado para proteger-se e tomar decisões amadurecidas. A Temperança pede calma e equilíbrio. O Nove de Paus confere o 'jeito precavido e ancorado nos aprendizados antigos' para guiar os passos." }
                 ]
@@ -1352,7 +1349,7 @@
                 exemplo: "Focar em um objetivo financeiro de forma obstinada. Separar uma quantia de dinheiro para satisfazer um luxo estritamente pessoal, sem nenhum peso na consciência.",
                 conselho: "[Egocentrismo, astúcia, autopreservação, ambição] Orienta a priorizar estritamente os seus próprios interesses, cuidando do seu bem-estar sem se deixar constranger por ninguém. Conecte-se com suas ambições legítimas e coloque suas vontades no topo das prioridades temporárias.",
                 metodoEuropeu: [
-                    { comb: "Três de Ouros", texto: "A energia de ambição e tentação encontra a interação com o meio e terceiros. No amor, revela a contaminação da relação por fofocas e intrigas que espalham desconfiança e testam a segurança do casal. O Diabo injeta a malícia e os impulsos ocultos. O Três de Ouros confere o 'jeito de burburinho ou interferência coletiva' no cotidiano." },
+                    { comb: "Três de Ouros", texto: "A energia de ambição e tentação encontra a interaction com o meio e terceiros. No amor, revela a contaminação da relação por fofocas e intrigas que espalham desconfiança e testam a segurança do casal. O Diabo injeta a malícia e os impulsos ocultos. O Três de Ouros confere o 'jeito de burburinho ou interferência coletiva' no cotidiano." },
                     { comb: "Dois de Paus", texto: "A energia de autopreservação e astúcia encontra a gestão de caminhos e opções. O conselho é agir pensando unicamente no próprio bem-estar, ser malandro para evitar enrascadas constrangedoras e postergar tarefas pesadas para não se desgastar. O Diabo orienta a focar nos próprios interesses e na ambição pessoal. O Dois de Paus coloca o 'jeito estrategista de separar o que fazer agora e o que deixar para depois' para se preservar." }
                 ]
             },
@@ -1551,14 +1548,12 @@
                 card.innerHTML = '';
                 
                 if (card.classList.contains('linear-card')) {
-                    let id = card.getAttribute('data-scr-slot') || card.getAttribute('data-csmd-slot') || card.getAttribute('data-ta-slot') || card.getAttribute('data-dupla-slot') || card.getAttribute('data-davi-slot') || card.getAttribute('data-opo-slot') || card.getAttribute('data-oposcr-slot') || card.getAttribute('data-futebol-slot');
+                    let id = card.getAttribute('data-scr-slot') || card.getAttribute('data-csmd-slot') || card.getAttribute('data-ta-slot') || card.getAttribute('data-davi-slot') || card.getAttribute('data-opo-slot') || card.getAttribute('data-oposcr-slot') || card.getAttribute('data-futebol-slot');
                     
                     if(id) {
                         if (card.hasAttribute('data-davi-slot') || card.hasAttribute('data-futebol-slot')) {
                             let num = parseInt(id);
-                            card.textContent = num <= 7 ? num + " Maior" : num + " Menor";
-                        } else if (card.hasAttribute('data-dupla-slot')) {
-                            card.textContent = id === "1" ? "1 Maior" : "2 Menor";
+                            card.textContent = (card.hasAttribute('data-davi-slot') ? num <= 7 : num <= 8) ? num + " Maior" : num + " Menor";
                         } else if (card.hasAttribute('data-opo-slot') || card.hasAttribute('data-oposcr-slot')) {
                             card.textContent = id.includes('me') ? "Menor" : "Maior";
                         } else {
@@ -1635,7 +1630,6 @@
             oposicaoSequence = [];
 
             switch(selectedMode) {
-                case 'dupla': initDuplaGame(); break;
                 case 'oposicao': initOposicaoGame(); break;
                 case 'oposicaoScr': initOposicaoScrGame(); break;
                 case 'mandalaInterativa': initInteractiveGame(); break;
@@ -1656,9 +1650,6 @@
             } else if (mode === 'csmd') {
                 majors = [ document.querySelector('[data-csmd-slot="top-1"]'), document.querySelector('[data-csmd-slot="top-2"]') ];
                 minors = [ document.querySelector('[data-csmd-slot="bottom-1"]'), document.querySelector('[data-csmd-slot="bottom-2"]') ];
-            } else if (mode === 'dupla') {
-                majors = [ document.querySelector('[data-dupla-slot="1"]') ];
-                minors = [ document.querySelector('[data-dupla-slot="2"]') ];
             } else if (mode === 'ta') {
                 majors = [1,3,5,7,9,11,13].map(i => document.querySelector(`[data-ta-slot="${i}"]`));
                 minors = [2,4,6,8,10,12,14].map(i => document.querySelector(`[data-ta-slot="${i}"]`));
@@ -1666,8 +1657,8 @@
                 majors = [1,2,3,4,5,6,7].map(i => document.querySelector(`[data-davi-slot="${i}"]`));
                 minors = [8,9,10,11,12,13,14].map(i => document.querySelector(`[data-davi-slot="${i}"]`));
             } else if (mode === 'futebol') {
-                majors = [1,2,3,4,5,6,7].map(i => document.querySelector(`[data-futebol-slot="${i}"]`));
-                minors = [8,9,10,11,12,13,14].map(i => document.querySelector(`[data-futebol-slot="${i}"]`));
+                majors = [1,2,3,4,5,6,7,8].map(i => document.querySelector(`[data-futebol-slot="${i}"]`));
+                minors = [9,10,11,12,13,14,15,16].map(i => document.querySelector(`[data-futebol-slot="${i}"]`));
             } else if (mode === 'oposicao') {
                 majors = [ document.querySelector('[data-opo-slot="m1"]'), document.querySelector('[data-opo-slot="m2"]') ];
                 minors = [ document.querySelector('[data-opo-slot="me1"]'), document.querySelector('[data-opo-slot="me2"]') ];
@@ -1719,12 +1710,6 @@
             ensureSlotMapping(); resetAllSlots(); gamePanel.style.display = 'flex';
             postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex';
             setupMajorsGamePhase();
-        }
-
-        function initDuplaGame() {
-            gameMode = 'dupla'; mainBoard.className = 'board dupla-active game-active';
-            resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-            btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase();
         }
 
         function initScrGame() {
@@ -1896,11 +1881,25 @@
             postGameControls.style.display = 'flex';
         }
 
+        function checkIfAllSlotsFilled() {
+            if (!gameMode || gameMode === 'mandalaManual') return;
+            let targets = getGameTargets(gameMode);
+            let allSlots = [...targets.majors, ...targets.minors].filter(slot => slot != null);
+            let allFilled = allSlots.every(slot => slot.getAttribute('data-card-name') !== null);
+            if (allFilled) {
+                if (mainBoard.classList.contains('game-active')) {
+                    mainBoard.classList.remove('game-active');
+                    gamePanel.style.display = 'none';
+                    oposicaoSequence = []; 
+                    triggerFinalReveal();
+                }
+            }
+        }
+
         function playAnotherGame() {
             postGameControls.style.display = 'none';
             if (gameMode === 'mandalaManual') initManualMandalaMode();
             else if (gameMode === 'mandalaInterativa') initInteractiveGame();
-            else if (gameMode === 'dupla') initDuplaGame();
             else if (gameMode === 'oposicao') initOposicaoGame();
             else if (gameMode === 'oposicaoScr') initOposicaoScrGame();
             else if (gameMode === 'scr') initScrGame();
@@ -1922,11 +1921,13 @@
         }
 
         function selectCard(cardElement) {
-            if (mainBoard.classList.contains('game-active')) return;
+            if (cardElement.classList.contains('board-face-down')) return; 
+
             const savedName = cardElement.getAttribute('data-card-name');
             if (savedName || cardElement.style.backgroundImage) {
                 openDetailModalDirect(savedName, cardElement.style.backgroundImage.slice(5, -2)); return;
             }
+
             currentSelectedCard = cardElement; modal.style.display = 'flex';
             
             if (cardElement.hasAttribute('data-davi-slot')) {
@@ -1934,10 +1935,7 @@
                 if (daviId <= 7) filterDeck('major'); else filterDeck('minor');
             } else if (cardElement.hasAttribute('data-futebol-slot')) {
                 let futId = parseInt(cardElement.getAttribute('data-futebol-slot'));
-                if (futId <= 7) filterDeck('major'); else filterDeck('minor');
-            } else if (cardElement.hasAttribute('data-dupla-slot')) {
-                let duplaId = cardElement.getAttribute('data-dupla-slot');
-                if (duplaId === "1") filterDeck('major'); else filterDeck('minor');
+                if (futId <= 8) filterDeck('major'); else filterDeck('minor');
             } else if (cardElement.hasAttribute('data-opo-slot') || cardElement.hasAttribute('data-oposcr-slot')) {
                 let opoId = cardElement.getAttribute('data-opo-slot') || cardElement.getAttribute('data-oposcr-slot');
                 if (opoId.includes('me')) filterDeck('minor'); else filterDeck('major');
@@ -2084,7 +2082,11 @@
             selectedList.forEach(card => {
                 const cardDiv = document.createElement('div'); cardDiv.className = 'gallery-card';
                 cardDiv.style.backgroundImage = `url(${card.url})`;
-                cardDiv.onclick = () => { pickCardForSlot(currentSelectedCard, card, false); closeModal(); };
+                cardDiv.onclick = () => { 
+                    pickCardForSlot(currentSelectedCard, card, false); 
+                    closeModal(); 
+                    checkIfAllSlotsFilled();
+                };
                 cardsGrid.appendChild(cardDiv);
             });
         }
