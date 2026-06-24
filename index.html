@@ -102,6 +102,14 @@
             border-radius: 12px !important;
         }
 
+        #mainBoard[data-current-deck="MoonBaby"] .card,
+        #mainBoard[data-current-deck="MoonBaby"] .back-card,
+        #mainBoard[data-current-deck="MoonBaby"] .gallery-card {
+            filter: sepia(0.45) saturate(1.4) contrast(1.05) brightness(1.02) !important;
+            border: 0px solid #FFFFFF !important;
+            border-radius: 12px !important;
+        }
+
         #mainBoard[data-current-deck="RiderWaite"] .card,
         #mainBoard[data-current-deck="RiderWaite"] .back-card,
         #mainBoard[data-current-deck="RiderWaite"] .gallery-card {
@@ -143,6 +151,34 @@
             text-transform: uppercase; letter-spacing: 3px; margin: 0; text-align: center;
             color: var(--gold-main);
         }
+
+        /* --- BOTÃO MODO NOTURNO NO CANTO SUPERIOR DIREITO --- */
+        #btnNightMode {
+            position: fixed;
+            top: 14px;
+            right: 16px;
+            z-index: 2000;
+            width: auto;
+            padding: 0 12px;
+            height: 30px;
+            font-size: 9px;
+            letter-spacing: 1px;
+            border: 1px solid #555;
+            background: transparent;
+            color: var(--text-muted);
+            border-radius: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        #btnNightMode:hover { border-color: var(--text-main); color: var(--text-main); }
+        body.light-theme #btnNightMode { border-color: #aaa; color: #555; }
+        body.light-theme #btnNightMode:hover { border-color: #111; color: #111; }
 
         /* --- BOTÕES --- */
         .action-btn {
@@ -255,7 +291,7 @@
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             text-align: center; padding: 4px; box-sizing: border-box; border-radius: 6px;
         }
-        .card:hover { border-color: var(--gold-main); color: var(--gold-main); transform: rotate(calc(-1 * var(--a))) scale(1.05) translateY(-5px); }
+        .card:hover { transform: rotate(calc(-1 * var(--a))) scale(1.05) translateY(-5px); }
         .card.board-face-down { background-image: var(--card-back-img) !important; background-color: transparent !important; background-size: 100% 100% !important; background-position: center !important; background-repeat: no-repeat !important; border: 1px solid rgba(255,255,255,0.4) !important; color: transparent !important; }
         .card.empty-slot-clickable { border: 1px dashed rgba(255,255,255,0.4); background-color: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); cursor: pointer; }
         .card.empty-slot-clickable:hover { border: 1px solid #FFFFFF; background-color: rgba(255,255,255,0.1); color: #FFFFFF; transform: rotate(calc(-1 * var(--a))) scale(1.05); }
@@ -277,17 +313,45 @@
 
         #scrContainer .card, #csmdContainer .card, #duplaContainer .card, #oposicaoContainer .card { --card-w: calc(14 * var(--u)); --card-h: calc(24.3 * var(--u)); font-size: calc(2.4 * var(--u)); }
         #csmdContainer .card { --card-w: calc(7 * var(--u)); --card-h: calc(12 * var(--u)); font-size: calc(1.8 * var(--u)); }
-        #oposicaoScrContainer .card { --card-w: calc(4.5 * var(--u)); --card-h: calc(7.8 * var(--u)); font-size: calc(1.3 * var(--u)); }
+        #oposicaoScrContainer .card { --card-w: calc(5.2 * var(--u)); --card-h: calc(9.04 * var(--u)); font-size: calc(0.9 * var(--u)); }
+        #oposicaoScrContainer .slot-label { font-size: calc(0.9 * var(--u)); min-height: auto; margin-right: calc(1 * var(--u)); }
+
         #taContainer .card { --card-w: calc(11 * var(--u)); --card-h: calc(19 * var(--u)); font-size: calc(2.2 * var(--u)); }
         #daviContainer .card { --card-w: calc(10 * var(--u)); --card-h: calc(17.3 * var(--u)); font-size: calc(2.0 * var(--u)); }
         #duplaContainer .card { --card-w: calc(18.2 * var(--u)); --card-h: calc(31.6 * var(--u)); font-size: calc(2.6 * var(--u)); }
         .dupla-active .back-card, #duplaContainer .back-card { width: calc(18.2 * var(--u)) !important; height: calc(31.6 * var(--u)) !important; }
         #scrTempoContainer .card { --card-w: calc(14 * var(--u)); --card-h: calc(24.3 * var(--u)); font-size: calc(2.4 * var(--u)); }
-        #futebolContainer { --card-w: calc(9.3 * var(--u)); --card-h: calc(16.1 * var(--u)); }
+        #futebolContainer { --card-w: calc(7.44 * var(--u)); --card-h: calc(12.88 * var(--u)); }
         #futebolContainer .card { font-size: calc(1.85 * var(--u)); }
         #futebolContainer .linear-col { width: calc(2 * var(--card-w) + 1.5 * var(--u)); }
         #futebolContainer .slot-label { font-size: 10px; letter-spacing: 1px; line-height: 1.25; margin-bottom: 8px; }
         #futebolContainer .slot-label .slot-sublabel { font-size: 8px; margin-top: 3px; }
+
+        .board.futebol-scr-active #oposicaoScrContainer .card-inner-tag,
+        .board.oposicao-scr-active #oposicaoScrContainer .card-inner-tag {
+            font-size: calc(0.63 * var(--u)) !important; 
+        }
+        .board.futebol-scr-active #oposicaoScrContainer .slot-label,
+        .board.oposicao-scr-active #oposicaoScrContainer .slot-label {
+            font-size: calc(0.45 * var(--u)) !important;
+        }
+
+        .board.futebol-active #futebolContainer .card-inner-tag {
+            font-size: calc(0.63 * var(--u)) !important;
+        }
+        .board.futebol-active #futebolContainer .slot-label {
+            font-size: 5px !important;
+        }
+
+        .board.futebol-scr-active .game-grid .back-card,
+        .board.oposicao-scr-active .game-grid .back-card {
+            width: 22px !important;
+            height: 39px !important;
+        }
+        .board.futebol-active .game-grid .back-card {
+            width: 22px !important;
+            height: 39px !important;
+        }
 
         .linear-row { display: flex; gap: calc(6 * var(--u)); }
         .linear-col { display: flex; flex-direction: column; align-items: center; }
@@ -302,7 +366,6 @@
         .futebol-col { display: flex; flex-direction: column; gap: calc(1.5 * var(--u)); align-items: center; }
         .scr-tempo-deck-badge { font-size: calc(1.5 * var(--u)); font-family: 'Montserrat', sans-serif; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: calc(1 * var(--u)); text-align: center; }
 
-        /* Visibilidade dos containers */
         .central-pair, .side-pair-horizontal, .pair-container, .linear-container, .home-container { display: none !important; }
         .board.home-active .home-container { display: flex !important; }
         .board.mandala-active .central-pair, .board.mandala-active .side-pair-horizontal, .board.mandala-active .pair-container { display: flex !important; }
@@ -312,11 +375,11 @@
         .board.dupla-active #duplaContainer { display: flex !important; }
         .board.davi-active #daviContainer { display: flex !important; }
         .board.oposicao-active #oposicaoContainer { display: flex !important; }
-        .board.oposicao-scr-active #oposicaoScrContainer { display: flex !important; }
+        .board.oposicao-scr-active #oposicaoScrContainer, 
+        .board.futebol-scr-active #oposicaoScrContainer { display: flex !important; }
         .board.futebol-active #futebolContainer { display: flex !important; }
         .board.scr-tempo-active #scrTempoContainer { display: flex !important; }
 
-        /* Posicionamento dos containers */
         .board.mandala-active .central-pair,
         .board.mandala-active .pair-container,
         .board.mandala-active .side-pair-horizontal { top: 42%; }
@@ -335,7 +398,7 @@
 
         .back-card { width: calc(7.5 * var(--u)); height: calc(13 * var(--u)); background-image: var(--card-back-img); background-color: transparent; background-size: 100% 100%; background-position: center; background-repeat: no-repeat; border: 1px solid rgba(255,255,255,0.4); cursor: pointer; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s; flex-shrink: 0; border-radius: 6px; box-sizing: border-box; }
         .game-grid .back-card { width: 32px !important; height: 56px !important; border-radius: 4px; border-width: 1px !important; }
-        .game-grid .back-card:hover { transform: translateY(-4px) scale(1.1); border-color: var(--gold-main) !important; }
+        .game-grid .back-card:hover { transform: translateY(-4px) scale(1.1); }
         .back-card.revealed { pointer-events: none; animation: fadeOutSelection 0.3s ease forwards; }
         @keyframes fadeOutSelection { from { opacity: 1; transform: translateY(-4px) scale(1.1); } to { opacity: 0; transform: translateY(0) scale(0.85); } }
 
@@ -356,7 +419,7 @@
         .tab-btn.active { color: var(--gold-main); border-bottom: 2px solid var(--gold-main); }
         .cards-grid { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 18px; padding: 15px 10px 25px 10px; overflow-y: hidden; overflow-x: hidden; scroll-behavior: smooth; }
         .gallery-card { width: 110px; aspect-ratio: 7.5 / 13; background-size: 100% 100%; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: transform 0.4s, border-color 0.4s; border-radius: 6px; flex-shrink: 0; }
-        .gallery-card:hover { transform: scale(1.06) translateY(-4px); border-color: var(--gold-main); }
+        .gallery-card:hover { transform: scale(1.06) translateY(-4px); }
 
         .verb-box { border: 1px solid #333333; padding: 15px; margin-top: 22px; background-color: transparent; text-align: center; border-radius: 0; overflow: visible; flex-shrink: 0; }
         .verb-box-title { font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; color: var(--gold-main); display: block; margin-bottom: 12px; }
@@ -380,6 +443,8 @@
     </style>
 </head>
 <body>
+
+    <button id="btnNightMode" onclick="toggleTheme()">🌙 Noturno</button>
 
     <header class="nav-header">
         <h1 class="app-title">Viniastros</h1>
@@ -408,7 +473,7 @@
                     <select id="deckSelect" class="meta-select" onchange="applyDeckSelection()">
                         <option value="Alchemical">Alchemical Tarot</option>
                         <option value="GoldArt">Golden Art Nouveau</option>
-                        <option value="Radiant" selected>Radiant Waite (padrão)</option>
+                        <option value="Radiant">Radiant Waite</option>
                         <option value="Before">Before Tarot</option>
                         <option value="AfterTarot">After Tarot</option>
                         <option value="NewVision">New Vision Tarot</option>
@@ -418,6 +483,7 @@
                         <option value="OldStyle">Old Style Tarot</option>
                         <option value="Oppositions">Tarot of Oppositions</option>
                         <option value="RiderWaite">Rider Waite Clássico</option>
+                        <option value="MoonBaby" selected>Moon Baby Tarot (padrão)</option>
                     </select>
                 </div>
                 <div class="meta-selector-row">
@@ -454,13 +520,13 @@
                         </optgroup>
                         <optgroup label="Futebol">
                             <option value="futebol">Futebol</option>
+                            <option value="futebolScr">Futebol SCR</option>
                         </optgroup>
                     </select>
                     <button class="action-btn primary-cta" onclick="startSelectedGame()">Continuar</button>
                 </div>
             </div>
             <div class="bottom-links">
-                <button class="action-btn" id="btnToggleTheme" onclick="toggleTheme()">Modo Claro</button>
                 <button class="action-btn" onclick="openEncyclopedia()">78 Arcanos</button>
             </div>
         </div>
@@ -901,16 +967,13 @@
     </div>
 
     <script>
-    // =====================================================================
-    // RESIZE DINÂMICO E THEME TOGGLE
-    // =====================================================================
     function toggleTheme() {
         document.body.classList.toggle('light-theme');
-        const btn = document.getElementById('btnToggleTheme');
-        if(document.body.classList.contains('light-theme')) {
-            btn.textContent = 'Modo Escuro';
+        const btn = document.getElementById('btnNightMode');
+        if (document.body.classList.contains('light-theme')) {
+            btn.textContent = '🌑 Noturno';
         } else {
-            btn.textContent = 'Modo Claro';
+            btn.textContent = '☀️ Claro';
         }
     }
 
@@ -969,9 +1032,6 @@
     }
     window.addEventListener('resize', resizeBoardToFit);
 
-    // =====================================================================
-    // DECKS CONFIG
-    // =====================================================================
     const deckBaseUrls = {
         Alchemical:   'https://trilhasnouniverso.com.br/wp-content/uploads/2021/01/',
         GoldArt:      'https://marycusack.com/Decks/Images/Tarot/G/GoldArt/',
@@ -989,7 +1049,13 @@
     const decksWithSpecialMajorNaming = ['Before', 'AfterTarot', 'Fyodor'];
     const specialMajorFileNames = ["Fool","Magician","Priestess","Empress","Emperor","Hierophant","Lovers","Chariot","Strength","Hermit","Wheel","Justice","Hanged","Death","Temperance","Devil","Tower","Star","Moon","Sun","Judgement","World"];
     const deckPentaclesPrefixOverrides = { Fyodor: 'Co' };
-    let currentDeckKey = 'Radiant';
+    let currentDeckKey = 'MoonBaby';
+
+    const moonBabyMajors = ["https://i.ibb.co/LDpLtSpD/IMG-4190.png","https://i.ibb.co/mrXj7pGm/IMG-4191.png","https://i.ibb.co/b5d703rp/IMG-4192.png","https://i.ibb.co/n40BJ1x/IMG-4193.png","https://i.ibb.co/NnfSJ4Lq/IMG-4194.png","https://i.ibb.co/xqqGZM0s/IMG-4195.png","https://i.ibb.co/Q7hj1T7W/IMG-4196.png","https://i.ibb.co/mVNC1NSJ/IMG-4197.png","https://i.ibb.co/20c5Vwrd/IMG-4312.png","https://i.ibb.co/VpwJfDt1/IMG-4313.png","https://i.ibb.co/cSR7kRGC/IMG-4314.png","https://i.ibb.co/pj2w2Rwk/IMG-4315.png","https://i.ibb.co/5WQWTvSt/IMG-4202.png","https://i.ibb.co/cSkJ7YR3/IMG-4203.png","https://i.ibb.co/Xrpd6k2Y/IMG-4204.png","https://i.ibb.co/bgPr7G2H/IMG-4205.png","https://i.ibb.co/RR3LyDx/IMG-4206.png","https://i.ibb.co/z0M2cTr/IMG-4207.png","https://i.ibb.co/bRKPjCL9/IMG-4208.png","https://i.ibb.co/93Nwyj3p/IMG-4209.png","https://i.ibb.co/B27pJPQT/IMG-4318.png","https://i.ibb.co/8n5w4hLM/IMG-4319.png"];
+    const moonBabyPentacles = ["https://i.ibb.co/wZ37xFKL/IMG-4244.png","https://i.ibb.co/vxVZmP4n/IMG-4245.png","https://i.ibb.co/wh3B8Hmv/IMG-4246.png","https://i.ibb.co/PvT12XVQ/IMG-4247.png","https://i.ibb.co/4nsc6Mfx/IMG-4248.png","https://i.ibb.co/DHVmk422/IMG-4249.png","https://i.ibb.co/GfkBkY3q/IMG-4250.png","https://i.ibb.co/chn25CJC/IMG-4251.png","https://i.ibb.co/RT1nz4LC/IMG-4258.png","https://i.ibb.co/DPkBQKyg/IMG-4259.png","https://i.ibb.co/nMq5LCG2/IMG-4260.png","https://i.ibb.co/GQDvk7rf/IMG-4261.png","https://i.ibb.co/CFqrkLQ/IMG-4262.png","https://i.ibb.co/ks5Q7dSC/IMG-4263.png"];
+    const moonBabySwords = ["https://i.ibb.co/p64SwM4r/IMG-4227.png","https://i.ibb.co/NgVqLcfV/IMG-4228.png","https://i.ibb.co/qYWpNhQz/IMG-4229.png","https://i.ibb.co/nNWwbGsT/IMG-4230.png","https://i.ibb.co/qF4dBqs6/IMG-4231.png","https://i.ibb.co/v46M4ktY/IMG-4232.png","https://i.ibb.co/nMXYrVYK/IMG-4233.png","https://i.ibb.co/XxxmVVTC/IMG-4234.png","https://i.ibb.co/WWD1JQHt/IMG-4235.png","https://i.ibb.co/r2vwyZg2/IMG-4284.png","https://i.ibb.co/C5ZRnDP7/IMG-4285.png","https://i.ibb.co/svhVDCfH/IMG-4286.png","https://i.ibb.co/v6V4qf1p/IMG-4287.png","https://i.ibb.co/YBvJs2yd/IMG-4288.png"];
+    const moonBabyCups = ["https://i.ibb.co/XrbdxLby/IMG-4213.png","https://i.ibb.co/8nfvdW4d/IMG-4214.png","https://i.ibb.co/gZvyvhR0/IMG-4215.png","https://i.ibb.co/tTc9n051/IMG-4216.png","https://i.ibb.co/8gDR9Nn3/IMG-4217.png","https://i.ibb.co/HTFKjbkz/IMG-4218.png","https://i.ibb.co/LhYzXnZ8/IMG-4219.png","https://i.ibb.co/V0cXD3pb/IMG-4220.png","https://i.ibb.co/bRYXSHVr/IMG-4221.png","https://i.ibb.co/67y43mXX/IMG-4222.png","https://i.ibb.co/B26kRXx7/IMG-4223.png","https://i.ibb.co/ymLmZk8G/IMG-4224.png","https://i.ibb.co/zTY1Gxw4/IMG-4225.png","https://i.ibb.co/XrBp969v/IMG-4226.png"];
+    const moonBabyWands = ["https://i.ibb.co/Q391pz1r/IMG-4265.png","https://i.ibb.co/vxWrwTyG/IMG-4266.png","https://i.ibb.co/pB9v9JyZ/IMG-4267.png","https://i.ibb.co/HL2ZCVLt/IMG-4268.png","https://i.ibb.co/pBGbGqPy/IMG-4269.png","https://i.ibb.co/Kc9FCP5B/IMG-4270.png","https://i.ibb.co/bMMhFKWL/IMG-4271.png","https://i.ibb.co/ymxY1Rqt/IMG-4272.png","https://i.ibb.co/67H882rf/IMG-4273.png","https://i.ibb.co/chsLqQjD/IMG-4274.png","https://i.ibb.co/k6S4F57t/IMG-4275.png","https://i.ibb.co/N2v9cnnZ/IMG-4276.png","https://i.ibb.co/1fQfrLYt/IMG-4277.png","https://i.ibb.co/Pvx6pTjM/IMG-4278.png"];
 
     function applyDeckSelection() {
         const sel = document.getElementById('deckSelect');
@@ -999,34 +1065,34 @@
     }
 
     function buildMajorsForDeck(deckKey) {
+        if (deckKey === 'MoonBaby') return majorNames.map((name, i) => ({ name, url: moonBabyMajors[i] }));
         const b = deckBaseUrls[deckKey];
-        if (deckKey === 'Alchemical') {
-            return majorNames.map((name, i) => ({ name, url: `${b}${String(i).padStart(2, '0')}.jpg` }));
-        }
-        if (decksWithSpecialMajorNaming.includes(deckKey)) {
-            return majorNames.map((name, i) => ({ name, url: `${b}${specialMajorFileNames[i]}.jpg` }));
-        }
+        if (deckKey === 'Alchemical') return majorNames.map((name, i) => ({ name, url: `${b}${String(i).padStart(2, '0')}.jpg` }));
+        if (decksWithSpecialMajorNaming.includes(deckKey)) return majorNames.map((name, i) => ({ name, url: `${b}${specialMajorFileNames[i]}.jpg` }));
         return majorNames.map((name, i) => ({ name, url: `${b}${majorFileNames[i]}.jpg` }));
     }
 
     function buildMinorsForDeck(deckKey, prefix, suitLabel) {
+        if (deckKey === 'MoonBaby') {
+            let urls = [];
+            if(suitLabel === 'Ouros') urls = moonBabyPentacles;
+            if(suitLabel === 'Espadas') urls = moonBabySwords;
+            if(suitLabel === 'Copas') urls = moonBabyCups;
+            if(suitLabel === 'Paus') urls = moonBabyWands;
+            let cards = [];
+            for(let i=0; i<10; i++) cards.push({ name: (i === 0) ? `Ás de ${suitLabel}` : `${i+1} de ${suitLabel}`, url: urls[i] });
+            let courtNames = ['Pajem', 'Cavaleiro', 'Rainha', 'Rei'];
+            courtNames.forEach((court, i) => cards.push({ name: `${court} de ${suitLabel}`, url: urls[10 + i] }));
+            return cards;
+        }
+
         const b = deckBaseUrls[deckKey];
         if (deckKey === 'Alchemical') {
-            let startIdx = 0;
-            if(suitLabel === 'Paus') startIdx = 22;
-            else if(suitLabel === 'Copas') startIdx = 36;
-            else if(suitLabel === 'Espadas') startIdx = 50;
-            else if(suitLabel === 'Ouros') startIdx = 64;
-            
+            let startIdx = (suitLabel === 'Paus') ? 22 : (suitLabel === 'Copas') ? 36 : (suitLabel === 'Espadas') ? 50 : 64;
             let cards = [];
-            for(let i=0; i<10; i++) {
-                let cardName = (i === 0) ? `Ás de ${suitLabel}` : `${i+1} de ${suitLabel}`;
-                cards.push({ name: cardName, url: `${b}${startIdx + i}.jpg` });
-            }
-            let courtNames = ['Cavaleiro', 'Rainha', 'Rei', 'Pajem']; // Ordem do Alchemical (32, 33, 34, 35)
-            courtNames.forEach((court, i) => {
-                cards.push({ name: `${court} de ${suitLabel}`, url: `${b}${startIdx + 10 + i}.jpg` });
-            });
+            for(let i=0; i<10; i++) cards.push({ name: (i === 0) ? `Ás de ${suitLabel}` : `${i+1} de ${suitLabel}`, url: `${b}${startIdx + i}.jpg` });
+            let courtNames = ['Cavaleiro', 'Rainha', 'Rei', 'Pajem']; 
+            courtNames.forEach((court, i) => cards.push({ name: `${court} de ${suitLabel}`, url: `${b}${startIdx + 10 + i}.jpg` }));
             return cards;
         }
 
@@ -1044,9 +1110,10 @@
     }
 
     // =====================================================================
-    // FONTE DE SIGNIFICADOS
+    // SISTEMA INTELIGENTE DE LEITURA (TEMPLO DE AFRODITE + NORMAL)
     // =====================================================================
     let externalMeanings = null;
+    let externalTaMeanings = null;
 
     function applyMeaningSource() {
         const val = document.getElementById('meaningSourceSelect').value;
@@ -1060,6 +1127,7 @@
             fileTrigger.style.display = 'none';
             fileStatus.style.display  = 'none';
             externalMeanings = null;
+            externalTaMeanings = null;
         }
     }
 
@@ -1069,31 +1137,16 @@
         const fileStatus = document.getElementById('meaningFileStatus');
         fileStatus.textContent = 'Carregando: ' + file.name + '...';
         const ext = file.name.split('.').pop().toLowerCase();
-        if (ext === 'txt') {
-            const reader = new FileReader();
-            reader.onload = (e) => parseMeaningText(e.target.result, file.name);
-            reader.readAsText(file, 'UTF-8');
-        } else if (ext === 'pdf') {
-            const reader = new FileReader();
+        
+        const reader = new FileReader();
+        if (ext === 'txt' || ext === 'docx') {
             reader.onload = (e) => {
-                const arr = new Uint8Array(e.target.result);
-                let text = '';
-                for (let i = 0; i < arr.length; i++) {
-                    if (arr[i] >= 32 && arr[i] < 127) text += String.fromCharCode(arr[i]);
-                    else text += ' ';
+                let text = e.target.result;
+                if (ext === 'docx') {
+                    const matches = text.match(/<w:t[^>]*>([^<]*)<\/w:t>/g);
+                    text = matches ? matches.map(m => m.replace(/<[^>]+>/g, '')).join(' ') : text;
                 }
                 parseMeaningText(text, file.name);
-            };
-            reader.readAsArrayBuffer(file);
-        } else if (ext === 'docx') {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const raw = e.target.result;
-                    const matches = raw.match(/<w:t[^>]*>([^<]*)<\/w:t>/g);
-                    let text = matches ? matches.map(m => m.replace(/<[^>]+>/g, '')).join(' ') : raw;
-                    parseMeaningText(text, file.name);
-                } catch(err) { parseMeaningText('', file.name); }
             };
             reader.readAsText(file, 'UTF-8');
         }
@@ -1102,47 +1155,80 @@
     function parseMeaningText(text, fname) {
         const fileStatus = document.getElementById('meaningFileStatus');
         externalMeanings = {};
+        externalTaMeanings = {}; 
+
         const allCardNames = [
             ...majorNames.map(n => n.replace(/^\d+\s*[-–]\s*/, '').trim()),
             ...['Ouros','Espadas','Copas','Paus'].flatMap(suit => {
-                const names = ['Ás','2','3','4','5','6','7','8','9','10','Pajem','Cavaleiro','Rainha','Rei'];
-                return names.map(n => `${n} de ${suit}`);
+                return ['Ás','2','3','4','5','6','7','8','9','10','Pajem','Cavaleiro','Rainha','Rei'].map(n => `${n} de ${suit}`);
             })
         ];
+        
         const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
         const lines = text.split(/\r?\n/);
-        let currentCard = null, currentVerbs = [], currentBody = [];
-        const saveCard = () => {
-            if (!currentCard) return;
-            const bodyText = currentBody.join(' ').replace(/\s+/g,' ').trim();
-            externalMeanings[currentCard] = { verbos: currentVerbs.length > 0 ? currentVerbs : null, atributos: bodyText || null };
-        };
+        
+        let currentCard = null;
+        let currentTheme = null;
+        
         lines.forEach(line => {
-            const trimmed = line.trim();
+            let trimmed = line.trim();
             if (!trimmed) return;
-            let foundCard = null, afterName = '';
-            for (const cardName of allCardNames) {
-                if (norm(trimmed).startsWith(norm(cardName))) {
-                    foundCard = cardName;
-                    afterName = trimmed.slice(cardName.length).replace(/^[\s:–\-,]+/, '').trim();
-                    break;
+            
+            if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+                let themeStr = trimmed.slice(1, -1).toUpperCase();
+                if (['MENTAL', 'SENTIMENTAL', 'MATERIAL', 'FUTURO'].includes(themeStr)) {
+                    currentTheme = themeStr;
+                    return;
                 }
             }
+            
+            let foundCard = null;
+            for (const cardName of allCardNames) {
+                if (norm(trimmed).startsWith(norm(cardName))) {
+                    if (trimmed.length === cardName.length || trimmed[cardName.length] === ' ' || trimmed[cardName.length] === ':' || trimmed[cardName.length] === '[') {
+                        foundCard = cardName;
+                        break;
+                    }
+                }
+            }
+            
             if (foundCard) {
-                saveCard(); currentCard = foundCard;
-                currentVerbs = afterName ? afterName.split(/[,;\/]/).map(s => s.trim()).filter(s => s.length > 1 && s.length < 30) : [];
-                currentBody = [];
-            } else if (currentCard) { currentBody.push(trimmed); }
+                currentCard = foundCard;
+                currentTheme = null; 
+                if (!externalTaMeanings[currentCard]) {
+                    externalTaMeanings[currentCard] = { MENTAL: [], SENTIMENTAL: [], MATERIAL: [], FUTURO: [] };
+                }
+                
+                let afterName = trimmed.slice(foundCard.length).replace(/^[\s:–\-,]+/, '').trim();
+                if (afterName && !afterName.startsWith('[')) {
+                    externalMeanings[currentCard] = { 
+                        verbos: afterName.split(/[,;\/]/).map(s => s.trim()).filter(s => s.length > 0),
+                        atributos: afterName 
+                    };
+                }
+            } else if (currentCard && currentTheme) {
+                let phrases = trimmed.split(',').map(p => p.trim()).filter(p => p.length > 0);
+                externalTaMeanings[currentCard][currentTheme].push(...phrases);
+            } else if (currentCard) {
+                if (!externalMeanings[currentCard]) externalMeanings[currentCard] = { verbos: null, atributos: "" };
+                externalMeanings[currentCard].atributos += " " + trimmed;
+            }
         });
-        saveCard();
-        const count = Object.keys(externalMeanings).length;
-        fileStatus.textContent = count > 0 ? `✓ ${fname}: ${count} arcanos carregados.` : `⚠ ${fname}: Nenhum arcano reconhecido.`;
-        if (count === 0) externalMeanings = null;
+        
+        const taCount = Object.keys(externalTaMeanings).filter(k => 
+            externalTaMeanings[k].MENTAL.length > 0 || externalTaMeanings[k].SENTIMENTAL.length > 0
+        ).length;
+        const genCount = Object.keys(externalMeanings).length;
+        
+        if (taCount > 0) {
+            fileStatus.textContent = `✓ ${fname}: ${taCount} arcanos mapeados p/ Templo de Afrodite!`;
+        } else if (genCount > 0) {
+            fileStatus.textContent = `✓ ${fname}: ${genCount} arcanos lidos.`;
+        } else {
+            fileStatus.textContent = `⚠ ${fname}: Nenhum arcano reconhecido.`;
+        }
     }
 
-    // =====================================================================
-    // DADOS DO DECK
-    // =====================================================================
     let currentSelectedCard = null;
     let gameMode = 'mandalaInterativa';
 
@@ -1176,7 +1262,8 @@
         "20%20Judgement","21%20World"
     ];
 
-    const verbsMap = {
+    
+const verbsMap = {
     "O Louco": ["liberdade","aventura","impulsividade","desapego","risco","espontaneidade","potencial"],
     "O Mago": ["iniciativa","habilidade","comunicação","criação","foco","capacidade","action"],
     "A Sacerdotisa": [
@@ -1206,8 +1293,6 @@
     "O Sol": ["sucesso","alegria","vitalidade","clareza","brilho","realização","verdade"],
     "O Julgamento": ["renascimento","chamado","avaliação","despertar","absolvição","revelação","conclusão"],
     "O Mundo": ["plenitude","conclusão","realização","integração","sucesso","totalidade","recompensa"],
-
-    // Naipes...
     "Ás de Paus": [ "força vital máxima", "sorte por mérito", "potência pura dinâmica", "grandes oportunidades práticas", "resultados ampliados drasticamente", "fertilidade explosiva total", "criatividade brilhante ativa", "autoconfiança e coragem", "renascimento e passagens", "mudanças radicais vida", "explosão força física", "domínio do poder", "vigor sexual ativo", "excelente saúde física", "manejo do fogo", "sucesso novos negócios", "expansão da consciência" ],
     "2 de Paus": [ "projeto empacado", "impasse sem avanço", "paralisia por imprevistos", "hesitação e dúvida", "obstáculos superáveis", "adiamento passageiro", "fatos inesperados", "surpresas que adiam", "acordo não cumprido", "vontade de inércia", "postura de isentão", "busca por neutralidade", "estresse causador insônia", "situações de repouso", "função de ajustamento", "atrasos passageiros", "falta de entusiasmo" ],
     "3 de Paus": [ "conquista espaço novo", "ampliação de horizontes", "mente aberta visionária", "virada de página", "projeção longo prazo", "bases do futuro", "negociações bem-sucedidas", "acordos e parcerias", "comunicação fluida aberta", "progresso e expansão", "intercâmbios e permutas", "viagens e trânsito", "start empreendedor", "resiliência e tolerância", "melhora na saúde", "superação e perdão", "foco no futuro" ],
@@ -1222,7 +1307,6 @@
     "Cavaleiro de Paus": [ "action impetuosa", "movimento acelerado", "paixão explosiva", "busca por aventura", "energia inconstante", "foco disperso", "avanço rápido", "partida repentina", "coragem audaciosa", "liderança dinâmica", "entusiasmo contagiante", "impulsividade cega", "mudança de cenário", "temperamento ardente", "conquista veloz", "fuga da rotina", "força motriz" ],
     "Rainha de Paus": [ "confiança magnética", "alegria contagiante", "foco determinado", "independência forte", "carisma natural", "liderança acolhedora", "energia vibrante", "magnetismo pessoal", "fertilidade e calor", "paixão pela vida", "generosidade sincera", "coragem feminina", "presença marcante", "criatividade prática", "domínio social", "entusiasmo protetor", "independência financeira" ],
     "Rei de Paus": [ "autoridade inspiradora", "visão empreendedora", "liderança natural", "poder consolidado", "atitude diretiva", "domínio energético", "força de vontade", "foco no objetivo", "carisma dominador", "coragem de comandar", "mentor experiente", "execução magistral", "visão de futuro", "honestidade brutal", "pioneirismo ativo", "estabilidade pelo fogo", "realização audaz" ],
-
     "Ás de Copas": [ "Início emocional transbordante", "Sim absoluto categórico", "Sorte e êxtase", "Euforia e fertilidade", "Amor profundo genuíno", "Harmonia interna externa", "Reatividade emocional positiva", "Reconciliação e perdão", "Generosidade e otimismo", "Amparo social externo", "Cura interna profunda", "Receptividade a novidades", "Projetos materializados felizes", "Empatia e altruísmo", "Inspiração artística rica", "Novos elos afetivos", "Fertilidade orgânica mental" ],
     "2 de Copas": [ "Resultados iniciais satisfatórios", "Momento para negociar", "Comunicação fluida afável", "Acordos harmoniosos mútuos", "Resoluções de acordo", "Reciprocidade afetiva sincera", "Associações comerciais cooperativas", "Comprometimento emocional sólido", "Autoconfiança em recepção", "Suporte em equipe", "Flertes e vínculos", "Ofertas e presentes", "Conciliação pacífica conflitos", "Cumprimento promessas seguras", "Excelente saúde equilíbrio", "Química", "Igualdade de sentimentos" ],
     "3 de Copas": [ "Sorte e júbilo", "Ambientes livres receptivos", "Celebrações e festas", "Fim de conflitos", "Fartura alegrias genuínas", "Festa de conquistas", "Nascimento gravidez celebrada", "Êxtase em negociações", "Triunfo cura definitiva", "Ápice da fertilidade", "União cooperação festiva", "Terceira pessoa relação", "Simpatia profissional facilitada", "Festa da colheita", "Satisfação emocional renovada", "Descontração e lazer", "Conexões sociais valiosas" ],
@@ -1230,14 +1314,13 @@
     "5 de Copas": [ "Vitimismo paralisante trauma", "Fracasso por teimosia", "Ruína de expectativas", "Falta de equilíbrio", "Arrependimento perda valiosa", "Remorso amargura destrutiva", "Melancolia desilusão afetiva", "Isolamento após perdas", "Relacionamentos desgastados platônicos", "Exposição sofrimento consolo", "Foco perdas cegas", "Necessidade ressignificar atitudes", "Luto notícias ruins", "Potencial parar chorar", "Somatização crises emocionais", "Bloqueio foco defeitos", "Terapias cura desilusão" ],
     "6 de Copas": [ "Profunda saudade passado", "Retorno ex parceiros", "Desejo idealizado passado", "Escapismo melancolia ontem", "Lamentações nostálgicas antigas", "Recusa ao novo", "Postura conservadora tradicional", "Intolerância ao inédito", "Paralisado apego antigo", "Heranças valores familiares", "Proteção força ancestral", "Conforto solidariedade genuína", "Sentimentos puros tradicionais", "Romantismo conservador tímido", "Cura recolhimento luto", "Regras tradicionais vovó", "Obediência hierarquias antigas" ],
     "7 de Copas": [ "Deslumbramento estéril passado", "Carteirada social vaidade", "Euforia cega ilusão", "Propenso a trair", "Promessas não cumpridas", "Auto mentiras ilusões", "Filtro utópico irreal", "Soberba arrogância infantil", "Fuga por substâncias", "Anestesia sensorial compulsão", "Negacionismo ilusão ser", "Obsessão narcisista frívola", "Escapismo espiritual obrigações", "Perda noção perigos", "Otimismo exagerado cego", "Negócios enganosos miragens", "Objetivos inteiramente ilusórios" ],
-    "8 de Copas": [ "Abandono voluntário maduro", "Rompimento desleixo obrigações", "Negligência vida finanças", "Abandono tratamento saúde", "Fracasso apostado erro", "Desmascarado transformation kármica", "Retirada forçada desistência", "Perdas materiais desolação", "Vitimismo farsa revelada", "Rumo ao desconhecido", "Remorso depressão severa", "Intervenção psiquiátrica urgente", "Arrependimento real mudança", "Divórcio mentiras insustentáveis", "Demissão por negligência", "Responsabilidade dor escolhas", "Confrontado com realidade" ],
+    "8 de Copas": [ "Abandono Involuntároo", "Rompimento desleixo obrigações", "Negligência vida finanças", "Abandono tratamento saúde", "Fracasso apostado erro", "Desmascarado , traiu", "Retirada forçada desistência", "Perdas materiais desolação", "Vitimismo farsa revelada", "Rumo ao desconhecido", "Remorso depressão severa", "Intervenção psiquiátrica urgente", "Arrependimento real mudança", "Divórcio mentiras insustentáveis", "Demissão por negligência", "Responsabilidade dor escolhas", "Confrontado com realidade" ],
     "9 de Copas": [ "Felicidade satisfação plena", "Reconhecimento mérito carreira", "Expansão material plenitude", "Socialização banquetes festas", "Bom humor harmonia", "Lealdade promessas cumpridas", "Generosidade compartilhada altruísta", "Dignidade assumir erros", "Sonho real realizável", "Comemorações intensas bebedeira", "Conciliação pacífica paz", "Acordos comerciais sólidos", "Casamento próspero fartura", "Encontros comilanças familiares", "Postura rigorosa desculpas", "Franqueza exposição real", "Estabilidade prazer viver" ],
     "10 de Copas": [ "Intensidade distorções ilusórias", "Conto fadas irreal", "Euforia falsa perfeição", "Família irmãos alma", "Vínculos profundos plenitude", "Momentos genuínos afeto", "Uniões harmoniosas honestas", "Saciedade satisfação transbordante", "Apogeu festas familiares", "Sinceridade sob ilusões", "Paz puramente ilusória", "Mascarar dor carência", "Projeção fantasiosa exagerada", "Fantasia afetiva vazia", "Otimismo cego irreal", "Clímax união comunitária", "Expectativas projeções utópicas" ],
     "Pajem de Copas": ["inocência emocional","mensagem carinhosa","surpresa agradável","sintonia suave","afeto nascente","imaginação fértil","sensibilidade aflorada"],
     "Cavaleiro de Copas": ["romantismo ativo","convite amoroso","busca idealista","charme sedutor","aproximação poética","proposta afetiva","sonho em movimento"],
     "Rainha de Copas": ["acolhimento materno","empatia profunda","intuição guiada","suporte emocional","sensibilidade madura","amor compassivo","cura afetiva"],
     "Rei de Copas": ["controle emocional","maturidade afetiva","calma diplomática","conselho sábio","equilíbrio interno","acolhimento seguro","generosidade serena"],
-
     "Ás de Espadas": [ "Ideia fixa inicial", "Explosão de potência", "Capacidade de realização", "Lucidez mental cirúrgica", "Decisão rápida cortante", "Sentimentos intensos oscilantes", "Coragem e autoconfiança", "Esperteza intelectual articulada", "Fertilidade mental latente", "Clareza mental expansiva", "Certeza interna absoluta", "Potência sexual rígida", "Conflitos mentais paralisantes", "Acidentes e cortes", "Catalisador de impactos", "Amplificador de destruição", "Foco em meta" ],
     "2 de Espadas": [ "Cabo de guerra", "Orgulho rígido defensivo", "Rivalidade em empate", "Oposição simétrica equivalente", "Cegueira deliberada extrema", "Recusa da realidade", "Rupturas por divergências", "Incapacidade de ceder", "Recusa ao diálogo", "Oportunidades perdidas", "Desejo de razão", "Bloqueio à reconciliação", "Foco no conflito", "Dor futura previsível", "Crises de ansiedade", "Obstáculo por vaidade", "Busca por validação" ],
     "3 de Espadas": [ "Profunda tristeza avassaladora", "Decepção por mentira", "Coração machucado consentido", "Negligência com realidade", "Sofrimento por negação", "Traição extremamente dolorosa", "Falsa promessa frustrante", "Abandono e solidão", "Erros de julgamento", "Confusão mental generalizada", "Ruptura definitiva radical", "Incompatibilidade de temperamentos", "Mágoas e ressentimentos", "Perdas por brigas", "Ferimento físico real", "Dores físicas intensas", "Teimosia no fracasso" ],
@@ -1252,14 +1335,13 @@
     "Cavaleiro de Espadas": ["ação precipitada","ataque direto","fúria verbal","mente impaciente","investida fria","movimento brusco","argumentação agressiva"],
     "Rainha de Espadas": ["clareza implacável","julgamento frio","independência mental","corte cirúrgico","verdade dura","visão objetiva","razão absoluta"],
     "Rei de Espadas": ["autoridade intelectual","lógica rigorosa","estratégia fria","comando racional","justiça severa","mente estruturada","decisão imparcial"],
-
     "Ás de Ouros": [ "potência e começo", "materialização concreta", "sorte e realização", "reconhecimento e prestígio", "visibilidade e brilho", "amparado pelo divino", "ampliação de resultados", "infinitas possibilidades", "ausência de obstáculos", "resultados sólidos duradouros", "inteligência prática", "abundância e fertilidade", "relacionamentos sólidos", "livre arbítrio total", "recompensa por esforços", "herança e presentes", "prosperidade e conquista" ],
     "2 de Ouros": [ "adversidades e flexibilidade", "jogo de cintura", "adiamento e demora", "arcano kármico", "impasse temporário", "impedimentos concretos", "obstáculos fora alcance", "administrar a circunstância", "malabarismos materiais", "múltiplos projetos simultâneos", "mobilidade e mudança", "efeito gangorra", "adaptação necessária", "descomprometimento de humor", "dificuldades transponíveis", "esquiva de posicionamento", "administrar demandas diversas" ],
     "3 de Ouros": [ "avanço com ajuda", "orientação e tutoria", "cooperação e contribuição", "ajuda técnica especializada", "trabalho em equipe", "recebe ajuda experiente", "crescimento e progresso", "habilidade e perícia", "associação e parceria", "sociedade comercial", "planejamento e planilhas", "cumprimento de protocolos", "competência e qualificação", "provas e testes", "aprendizado supervisionado", "trabalho de formiguinha", "maturidade para ajuda" ],
     "4 de Ouros": [ "mesquinharia e avareza", "conservação material excessiva", "energia estagnada", "medo de perder", "egoísmo e desconfiança", "apego ao lucro", "incapacidade assumir riscos", "petrifica o que tem", "teimosia e rigidez", "ideias fixas arcaicas", "padrões comportamentais rígidos", "ciúmes e posse", "confinamento e reclusão", "autoproteção defensiva", "acumular e controlar", "imobilidade e mofo", "paranoia por segurança" ],
     "5 de Ouros": [ "pobreza e escassez", "afastamento e isolamento", "grandes prejuízos materiais", "perda de status", "precariedade da fé", "falta de recursos", "dificuldades reais graves", "rejeição e desaprovação", "carência afetiva total", "miséria e pessimismo", "ansiedade e angústia", "autocomiseração e desesperança", "crise de relacionamento", "risco de falência", "esgotamento e cansaço", "negligência e desleixo", "falta de sorte" ],
     "6 de Ouros": [ "doação e generosidade", "carente / necessitado", "retorno kármico justo", "atraso por orgulho", "aceitar ajuda externa", "recebimento de oportunidades", "ganhos materiais providenciais", "passividade e espera", "prejuízo solucionado", "apoio de especialistas", "esmola de atenção", "tutor e mecenas", "tratamento e medicamentos", "resgate e amparo", "superação pela humildade", "recompensas inusitadas", "aprendizado do doar" ],
-    "7 de Ouros": [ "colheita de lucros", "progresso e avanço", "insatisfação ambiciosa positiva", "recebimento de bens", "heranças e prêmios", "oportunidades e presentes", "parcerias e sociedades", "afeto e companheirismo", "prosperidade longo prazo", "meritocracia recompensada", "análise e avaliação", "florescimento seguro", "paciência e disciplina", "crescimento lento sólido", "maturidade e equilíbrio", "boas notícias financeiras", "independência conquistada" ],
+    "7 de Ouros": [ "colheita de lucros", "progresso e avanço", "insatisfação ambiciosa positiva", "recebimento de bens", "heranças e prêmios", "oportunidades e presentes", "parcerias e sociedades", "recebe afeto", "prosperidade longo prazo", "meritocracia recompensada", "análise e avaliação", "florescimento seguro", "paciência e disciplina", "crescimento lento sólido", "maturidade e equilíbrio", "boas notícias financeiras", "independência conquistada" ],
     "8 de Ouros": [ "recomeço e renascimento", "colheita justa kármica", "novidades construtivas", "melhora de vida", "recomeçar com experiência", "novos aprendizados práticos", "renascimento afetivo", "perito e refinamento", "aprimoramento perfeccionista", "habilidade de lapidador", "novo ciclo consciente", "aprendizagem autodidata", "trabalho solitário focado", "sucesso e rotina", "descoberta de potenciais", "investimento em si", "prosperidade e segurança" ],
     "9 de Ouros": [ "fertilidade e satisfação", "esforço recompensado", "distinção social merecida", "sensação dever cumprido", "felicidade e bem-estar", "sucesso longo prazo", "estabilidade e segurança", "luxo e requinte", "descansos e férias", "colheita de frutos", "excelentes oportunidades", "bom negócio emprego", "produtividade e concretização", "realização durável", "autoconfiança e independência", "recuperação de prejuízos", "plenitude e gravidez" ],
     "10 de Ouros": [ "realização longo prazo", "sucesso concreto", "família legalizada cartório", "felicidade e glória", "fim dos problemas", "perpetuação sucesso material", "legado e heranças", "bens materiais consolidados", "tradição e costumes", "ancestralidade e hereditariedade", "imóveis e patrimônio", "rede relacionamentos estável", "vínculos valiosos férteis", "boa administração recursos", "responsabilidade e competência", "segurança e esforços", "convivência prazerosa valorizada" ],
@@ -1269,8 +1351,7 @@
     "Rei de Ouros": [ "poder financeiro consolidado", "domínio material absoluto", "sucesso consolidado", "autoridade prática", "riqueza estruturada", "império construído", "gestão magistral", "estabilidade inabalável", "segurança patrimonial", "realismo pragmático", "provedor confiável", "fidelidade aos valores", "conquistas duradouras", "maturidade e solidez", "liderança de negócios", "firmeza e determinação", "recompensa de carreira" ]
     };
 
-        const futebolVerbsMap = {
-        // ARCANOS MAIORES - O Destino da Partida
+    const futebolVerbsMap = {
         "O Louco": ["gol de surpresa", "virada inesperada", "imprevisível", "erro bizarro", "caos tático"],
         "O Mago": ["criação genial", "domínio absoluto", "passe para gol", "controle do jogo", "vitória técnica"],
         "A Sacerdotisa": ["zero a zero", "jogo travado", "poucas chances", "foco defensivo", "placar magro"],
@@ -1293,8 +1374,6 @@
         "O Sol": ["vitória consagradora", "chuva de gols", "artilharia", "domínio total", "glória"],
         "O Julgamento": ["gol no acréscimo", "decisão nos pênaltis", "salvo pelo gongo", "reviravolta final", "acordar pro jogo"],
         "O Mundo": ["título garantido", "vitória perfeita", "goleada impecável", "festa da torcida", "resultado máximo"],
-
-        // PAUS - O Impulso Ofensivo e a Pressão
         "Ás de Paus": ["chute pro gol", "explosão ofensiva", "pressão total", "bola na trave", "ataque letal"],
         "2 de Paus": ["ataque ineficiente", "jogo de meio-campo", "pausa no ritmo", "estudo tático", "empate provisório"],
         "3 de Paus": ["bola nas costas", "lançamento perfeito", "domínio territorial", "chances claras", "avanço"],
@@ -1309,8 +1388,6 @@
         "Cavaleiro de Paus": ["pressão absurda", "ataque fulminante", "ritmo acelerado", "arrancada para gol", "agressividade"],
         "Rainha de Paus": ["confiança no ataque", "pressão constante", "presença de área", "motivação alta", "imposição"],
         "Rei de Paus": ["controle ofensivo", "domínio do jogo", "autoridade em campo", "ataque organizado", "vitória construída"],
-
-        // COPAS - A Moral, a Torcida e a Sintonia
         "Ás de Copas": ["alegria da torcida", "gol comemorado", "sintonia perfeita", "empolgação", "jogo fluído"],
         "2 de Copas": ["tabelinha de gol", "entrosamento máximo", "jogo amigável", "empate pacífico", "acordo em campo"],
         "3 de Copas": ["festa garantida", "chuva de gols", "vitória coletiva", "comemoração", "torcida feliz"],
@@ -1325,8 +1402,6 @@
         "Cavaleiro de Copas": ["gol de placa", "toque de bola", "ritmo envolvente", "futebol vistoso", "charme tático"],
         "Rainha de Copas": ["calma no placar", "apoio da torcida", "jogo seguro", "foco no passe", "estabilidade emocional"],
         "Rei de Copas": ["controle dos nervos", "maturidade tática", "vantagem administrada", "frieza", "vitória tranquila"],
-
-        // ESPADAS - As Faltas, o Corte e o Dano
         "Ás de Espadas": ["gol de falta", "chute indefensável", "corte cirúrgico", "foco no ataque", "decisão rápida"],
         "2 de Espadas": ["empate sem gols", "jogo cego", "medo de atacar", "retranca mútua", "bloqueio tático"],
         "3 de Espadas": ["gol contra", "lesão grave", "derrota dolorosa", "frango", "sofrimento da torcida"],
@@ -1341,8 +1416,6 @@
         "Cavaleiro de Espadas": ["pressão alta", "carrinho perigoso", "contra-ataque furioso", "agressividade", "urgência de gol"],
         "Rainha de Espadas": ["defesa fria", "foco no resultado", "sem firula", "corte seco", "tática rígida"],
         "Rei de Espadas": ["vitória calculada", "zaga impecável", "estratégia pura", "frieza no ataque", "resultado exato"],
-
-        // OUROS - O Placar, a Posse e a Materialização
         "Ás de Ouros": ["gol certo", "resultado garantido", "prêmio em campo", "domínio da bola", "lucro no placar"],
         "2 de Ouros": ["resultado oscilante", "viradas", "improviso", "adaptação", "manter a posse"],
         "3 de Ouros": ["gol de equipe", "construção de placar", "tática funcionando", "passe perfeito", "esforço premiado"],
@@ -1358,8 +1431,6 @@
         "Rainha de Ouros": ["administrar vantagem", "posse de bola", "segurança atrás", "conforto tático", "resistência"],
         "Rei de Ouros": ["vitória absoluta", "domínio total", "resultado garantido", "poder em campo", "time imbatível"]
     };
-
-
 
     const extendedMeanings = {
         "O Louco": { situacao: "Representa o início de uma jornada imprevista. Uma situação onde é necessário um salto de fé, rompendo com o conformismo para abraçar o desconhecido com total liberdade.", metodoEuropeu: [ { comb: "Três de Espadas", texto: "A energia de agir sem amarras encontra o desgosto das expectativas frustradas." }, { comb: "Ás de Ouros", texto: "A energia de desprendimento e novos começos encontra a semente de uma oportunidade real." } ] },
@@ -1390,8 +1461,7 @@
         let cards = [];
         for (let i = 1; i <= 10; i++) {
             let numStr = String(i).padStart(2, '0');
-            let cardName = i === 1 ? `Ás de ${suitLabel}` : `${i} de ${suitLabel}`;
-            cards.push({ name: cardName, url: `${b}${prefix}${numStr}.jpg` });
+            cards.push({ name: i === 1 ? `Ás de ${suitLabel}` : `${i} de ${suitLabel}`, url: `${b}${prefix}${numStr}.jpg` });
         }
         const courtNames = ['Pajem','Cavaleiro','Rainha','Rei'];
         const courtSuffixes = ['C1P','C2K','C3Q','C4K'];
@@ -1420,6 +1490,8 @@
         wands:     buildMinorsForDeck(currentDeckKey, 'W', 'Paus')
     };
 
+    document.getElementById('mainBoard').setAttribute('data-current-deck', currentDeckKey);
+
     function shuffle(array) {
         let a = [...array], ci = a.length, ri;
         while (ci !== 0) { ri = Math.floor(Math.random() * ci); ci--; [a[ci], a[ri]] = [a[ri], a[ci]]; }
@@ -1433,7 +1505,7 @@
             card.classList.remove('board-face-down','empty-slot-clickable');
             card.removeAttribute('data-reveal-url');
             card.removeAttribute('data-card-name');
-            card.removeAttribute('data-meaning-index'); // Zera o index do ciclo
+            card.removeAttribute('data-meaning-index');
             card.innerHTML = '';
             if (card.classList.contains('linear-card')) {
                 let id = card.getAttribute('data-scr-slot') || card.getAttribute('data-csmd-slot')
@@ -1460,43 +1532,47 @@
         });
     }
 
-    // =====================================================================
-    // LÓGICA DE INJEÇÃO E CICLO DE SIGNIFICADOS
-    // =====================================================================
-        function injectInnerTag(slotElement, cardName, forceNext = false) {
+    function injectInnerTag(slotElement, cardName, forceNext = false) {
         if (!cardName) return;
         
         let cleanName = cardName.replace(/^\d+\s*[-–]\s*/, "").trim();
         let wordPool = ["Fluxo"];
         
-        const isFutebolOrOposicao = (gameMode === 'futebol' || gameMode === 'oposicaoScr');
-        
-        // Verifica primeiro se tem arquivo de upload
-        if (externalMeanings && externalMeanings[cleanName] && externalMeanings[cleanName].verbos && externalMeanings[cleanName].verbos.length > 0) {
-            wordPool = externalMeanings[cleanName].verbos;
-        } 
-        // Se for jogo de futebol/oposição e existir no dicionário novo
-        else if (isFutebolOrOposicao && futebolVerbsMap[cleanName]) {
-            wordPool = futebolVerbsMap[cleanName];
-        }
-        // Se for jogo normal e existir no dicionário original
-        else if (verbsMap[cleanName]) {
-            wordPool = verbsMap[cleanName];
-        } 
-        // Fallback genérico para variações de nome
-        else {
-            let found = false;
-            let targetMap = isFutebolOrOposicao ? futebolVerbsMap : verbsMap;
-            
-            for (let key in targetMap) {
-                if (cleanName.toLowerCase() === key.toLowerCase() || cardName.toLowerCase().includes(key.toLowerCase())) {
-                    wordPool = targetMap[key]; 
-                    found = true;
-                    break;
+        if (gameMode === 'ta') {
+            let taSlot = slotElement.getAttribute('data-ta-slot');
+            if (taSlot) {
+                let slotNum = parseInt(taSlot);
+                let theme = 'MENTAL';
+                if ([1, 2, 7, 8].includes(slotNum)) theme = 'MENTAL';
+                else if ([3, 4, 9, 10].includes(slotNum)) theme = 'SENTIMENTAL';
+                else if ([5, 6, 11, 12].includes(slotNum)) theme = 'MATERIAL';
+                else if ([13, 14].includes(slotNum)) theme = 'FUTURO';
+                
+                if (externalTaMeanings && externalTaMeanings[cleanName] && externalTaMeanings[cleanName][theme] && externalTaMeanings[cleanName][theme].length > 0) {
+                    wordPool = externalTaMeanings[cleanName][theme];
+                } else if (verbsMap[cleanName]) {
+                    wordPool = verbsMap[cleanName];
                 }
             }
-            // Se for jogo de futebol mas não achou variação no map de futebol, puxa do original
-            if (!found && isFutebolOrOposicao) {
+        } 
+        else if (gameMode === 'futebol' || gameMode === 'futebolScr') {
+            if (futebolVerbsMap[cleanName]) {
+                wordPool = futebolVerbsMap[cleanName];
+            } else {
+                for (let key in futebolVerbsMap) {
+                    if (cleanName.toLowerCase() === key.toLowerCase() || cardName.toLowerCase().includes(key.toLowerCase())) {
+                        wordPool = futebolVerbsMap[key]; break;
+                    }
+                }
+            }
+        } 
+        else if (externalMeanings && externalMeanings[cleanName] && externalMeanings[cleanName].verbos && externalMeanings[cleanName].verbos.length > 0) {
+            wordPool = externalMeanings[cleanName].verbos;
+        } 
+        else {
+            if (verbsMap[cleanName]) {
+                wordPool = verbsMap[cleanName];
+            } else {
                 for (let key in verbsMap) {
                     if (cleanName.toLowerCase() === key.toLowerCase() || cardName.toLowerCase().includes(key.toLowerCase())) {
                         wordPool = verbsMap[key]; break;
@@ -1508,7 +1584,7 @@
         let currentIndex = parseInt(slotElement.getAttribute('data-meaning-index')) || 0;
         
         if (forceNext) {
-            currentIndex = (currentIndex + 1) % wordPool.length;
+            currentIndex = Math.floor(Math.random() * wordPool.length);
             slotElement.setAttribute('data-meaning-index', currentIndex);
         } else if (!slotElement.hasAttribute('data-meaning-index')) {
             currentIndex = Math.floor(Math.random() * wordPool.length);
@@ -1518,22 +1594,18 @@
         let luckyWord = wordPool[currentIndex];
         
         const existing = slotElement.querySelector('.card-inner-tag');
-        if (existing) {
-            existing.remove();
-        }
+        if (existing) existing.remove();
 
         const tagDiv = document.createElement('div');
         tagDiv.className = 'card-inner-tag';
         tagDiv.textContent = luckyWord;
         slotElement.appendChild(tagDiv);
         
-        let cardWidth = slotElement.clientWidth || (14 * 10);
-        let fontSize = cardWidth * 0.14;
-        if (luckyWord.length > 8) fontSize = cardWidth * 0.11;
-        if (luckyWord.length > 12) fontSize = cardWidth * 0.09;
-        tagDiv.style.fontSize = fontSize + 'px';
+        let sizeU = "1.96";
+        if (luckyWord.length > 8) sizeU = "1.54";
+        if (luckyWord.length > 12) sizeU = "1.26";
+        tagDiv.style.fontSize = `calc(${sizeU} * var(--u))`;
     }
-
 
     window.updateMeanings = function() {
         document.querySelectorAll('.card[data-card-name]').forEach(card => {
@@ -1567,23 +1639,34 @@
         const allMinors = targets.minors.filter(Boolean);
         const majorsFilled = allMajors.every(s => s.getAttribute('data-card-name'));
         const minorsFilled = allMinors.every(s => s.getAttribute('data-card-name'));
+        
         if (majorsFilled && minorsFilled) { triggerFinalReveal(); return; }
+        
         if (oposicaoSequence.length === 0 && mainBoard.classList.contains('game-active')) {
             if (majorsFilled && activePhase === 'majors') {
-                gameStatus.textContent = "EMBARALHANDO ARCANOS MENORES...";
-                gameGrid.innerHTML = '<div class="shuffling-container"></div>';
-                const sc = gameGrid.querySelector('.shuffling-container');
-                for (let i = 0; i < 12; i++) {
-                    const c = document.createElement('div');
-                    c.className = 'back-card shuffling-card';
-                    c.style.animationDelay = `${i * 0.1}s`;
-                    sc.appendChild(c);
+                activePhase = 'transition';
+                if (gamePanel.style.display !== 'none') {
+                    gameStatus.textContent = "EMBARALHANDO ARCANOS MENORES...";
+                    gameGrid.innerHTML = '<div class="shuffling-container"></div>';
+                    const sc = gameGrid.querySelector('.shuffling-container');
+                    for (let i = 0; i < 12; i++) {
+                        const c = document.createElement('div');
+                        c.className = 'back-card shuffling-card';
+                        c.style.animationDelay = `${i * 0.1}s`;
+                        sc.appendChild(c);
+                    }
+                    setTimeout(setupMinorsGamePhase, 1500);
+                } else {
+                    setupMinorsGamePhase();
                 }
-                setTimeout(setupMinorsGamePhase, 1000);
             }
         } else if (oposicaoSequence.length > 0 && mainBoard.classList.contains('game-active')) {
             let stepFilled = phaseTargets.every(s => s.getAttribute('data-card-name'));
-            if (stepFilled) { sequenceIndex++; setTimeout(runNextSequenceStep, 400); }
+            if (stepFilled && activePhase !== 'transition') { 
+                activePhase = 'transition';
+                sequenceIndex++; 
+                setTimeout(runNextSequenceStep, 400); 
+            }
         }
     }
 
@@ -1613,7 +1696,7 @@
         } else if (mode === 'oposicao') {
             majors = ['m1','m2'].map(s => document.querySelector(`[data-opo-slot="${s}"]`));
             minors = ['me1','me2'].map(s => document.querySelector(`[data-opo-slot="${s}"]`));
-        } else if (mode === 'oposicaoScr') {
+        } else if (mode === 'oposicaoScr' || mode === 'futebolScr') {
             majors = ['t-m1','t-m2','t-m3','b-m1','b-m2','b-m3'].map(s => document.querySelector(`[data-oposcr-slot="${s}"]`));
             minors = ['t-me1','t-me2','t-me3','b-me1','b-me2','b-me3'].map(s => document.querySelector(`[data-oposcr-slot="${s}"]`));
         } else if (mode === 'mandalaInterativa' || mode === 'mandalaManual') {
@@ -1656,9 +1739,7 @@
 
     function enableEmptySlotClicks() {
         document.querySelectorAll('.board:not(.home-active) .card').forEach(card => {
-            if (!card.getAttribute('data-card-name') && !card.style.backgroundImage) {
-                card.classList.add('empty-slot-clickable');
-            }
+            if (!card.getAttribute('data-card-name') && !card.style.backgroundImage) card.classList.add('empty-slot-clickable');
         });
     }
 
@@ -1680,6 +1761,7 @@
             case 'ta':                initTaGame(); break;
             case 'davi':              initDaviGame(); break;
             case 'futebol':           initFutebolGame(); break;
+            case 'futebolScr':        initFutebolScrGame(); break;
         }
         enableEmptySlotClicks();
         resizeBoardToFit();
@@ -1700,29 +1782,12 @@
         mainBoard.style.transform = '';
     }
 
-    function initInteractiveGame() {
-        gameMode = 'mandalaInterativa'; mainBoard.className = 'board mandala-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex';
-        postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex';
-        setupMajorsGamePhase();
-    }
-    function initDuplaGame() {
-        gameMode = 'dupla'; mainBoard.className = 'board dupla-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase();
-    }
-    function initScrGame() {
-        gameMode = 'scr'; mainBoard.className = 'board scr-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase();
-    }
+    function initInteractiveGame() { gameMode = 'mandalaInterativa'; mainBoard.className = 'board mandala-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase(); }
+    function initDuplaGame() { gameMode = 'dupla'; mainBoard.className = 'board dupla-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase(); }
+    function initScrGame() { gameMode = 'scr'; mainBoard.className = 'board scr-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase(); }
     function initScrTempoGame() {
-        gameMode = 'scrTempo'; mainBoard.className = 'board scr-tempo-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex';
-        const beforeDeck    = buildScrTempoDeck('Before');
-        const newVisionDeck = buildScrTempoDeck('NewVision');
-        const afterDeck     = buildScrTempoDeck('AfterTarot');
+        gameMode = 'scrTempo'; mainBoard.className = 'board scr-tempo-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex';
+        const beforeDeck = buildScrTempoDeck('Before'), newVisionDeck = buildScrTempoDeck('NewVision'), afterDeck = buildScrTempoDeck('AfterTarot');
         startSequence([
             { type: 'custom', msg: 'SITUAÇÃO — ESCOLHA O MAIOR (Before Tarot)', pool: shuffle(beforeDeck.majors), targets: [document.querySelector('[data-scr-tempo-slot="top-1"]')] },
             { action: 'shuffle', msg: 'EMBARALHANDO MENORES...' },
@@ -1737,30 +1802,13 @@
             { type: 'custom', msg: 'RESULTADO — ESCOLHA O MENOR (After Tarot)', pool: shuffle(afterDeck.minors), targets: [document.querySelector('[data-scr-tempo-slot="bottom-3"]')] }
         ]);
     }
-    function initCsmdGame() {
-        gameMode = 'csmd'; mainBoard.className = 'board csmd-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase();
-    }
-    function initTaGame() {
-        gameMode = 'ta'; mainBoard.className = 'board ta-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase();
-    }
-    function initDaviGame() {
-        gameMode = 'davi'; mainBoard.className = 'board davi-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase();
-    }
-    function initFutebolGame() {
-        gameMode = 'futebol'; mainBoard.className = 'board futebol-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase();
-    }
+    function initCsmdGame() { gameMode = 'csmd'; mainBoard.className = 'board csmd-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase(); }
+    function initTaGame() { gameMode = 'ta'; mainBoard.className = 'board ta-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase(); }
+    function initDaviGame() { gameMode = 'davi'; mainBoard.className = 'board davi-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase(); }
+    function initFutebolGame() { gameMode = 'futebol'; mainBoard.className = 'board futebol-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex'; setupMajorsGamePhase(); }
+    
     function initOposicaoGame() {
-        gameMode = 'oposicao'; mainBoard.className = 'board oposicao-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex';
+        gameMode = 'oposicao'; mainBoard.className = 'board oposicao-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex';
         startSequence([
             { type: 'majors', msg: 'ESCOLHA O ARCANO MAIOR (OPÇÃO 1)', targets: [document.querySelector('[data-opo-slot="m1"]')] },
             { action: 'shuffle', msg: 'EMBARALHANDO PARA OS MENORES...' },
@@ -1771,10 +1819,22 @@
             { type: 'minors', msg: 'ESCOLHA O ARCANO MENOR (OPÇÃO 2)', targets: [document.querySelector('[data-opo-slot="me2"]')] }
         ]);
     }
+    
     function initOposicaoScrGame() {
-        gameMode = 'oposicaoScr'; mainBoard.className = 'board oposicao-scr-active game-active';
-        resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none';
-        btnVoltar.style.display = 'inline-flex';
+        gameMode = 'oposicaoScr'; mainBoard.className = 'board oposicao-scr-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex';
+        startSequence([
+            { type: 'majors', msg: 'ESCOLHA OS MAIORES (OPÇÃO 1)', targets: ['t-m1','t-m2','t-m3'].map(s => document.querySelector(`[data-oposcr-slot="${s}"]`)) },
+            { action: 'shuffle', msg: 'EMBARALHANDO PARA OS MENORES...' },
+            { type: 'minors', msg: 'ESCOLHA OS MENORES (OPÇÃO 1)', targets: ['t-me1','t-me2','t-me3'].map(s => document.querySelector(`[data-oposcr-slot="${s}"]`)) },
+            { action: 'shuffle', msg: 'EMBARALHANDO PARA A OPÇÃO 2...' },
+            { type: 'majors', msg: 'ESCOLHA OS MAIORES (OPÇÃO 2)', targets: ['b-m1','b-m2','b-m3'].map(s => document.querySelector(`[data-oposcr-slot="${s}"]`)) },
+            { action: 'shuffle', msg: 'EMBARALHANDO PARA OS MENORES...' },
+            { type: 'minors', msg: 'ESCOLHA OS MENORES (OPÇÃO 2)', targets: ['b-me1','b-me2','b-me3'].map(s => document.querySelector(`[data-oposcr-slot="${s}"]`)) }
+        ]);
+    }
+
+    function initFutebolScrGame() {
+        gameMode = 'futebolScr'; mainBoard.className = 'board futebol-scr-active game-active'; resetAllSlots(); gamePanel.style.display = 'flex'; postGameControls.style.display = 'none'; btnVoltar.style.display = 'inline-flex';
         startSequence([
             { type: 'majors', msg: 'ESCOLHA OS MAIORES (OPÇÃO 1)', targets: ['t-m1','t-m2','t-m3'].map(s => document.querySelector(`[data-oposcr-slot="${s}"]`)) },
             { action: 'shuffle', msg: 'EMBARALHANDO PARA OS MENORES...' },
@@ -1823,18 +1883,14 @@
                     pickCardForSlot(phaseTargets[targetIndex], cardData, true);
                     targetIndex++;
                 }
-                while (targetIndex < phaseTargets.length && phaseTargets[targetIndex].getAttribute('data-card-name')) { targetIndex++; }
-                if (targetIndex >= phaseTargets.length) { sequenceIndex++; setTimeout(runNextSequenceStep, 400); }
             };
             gameGrid.appendChild(backCard);
         });
     }
 
     function setupMajorsGamePhase() {
-        activePhase = 'majors'; targetIndex = 0;
-        gameStatus.textContent = "ESCOLHA OS ARCANOS MAIORES";
-        phaseTargets = getGameTargets(gameMode).majors;
-        gameGrid.innerHTML = '';
+        activePhase = 'majors'; targetIndex = 0; gameStatus.textContent = "ESCOLHA OS ARCANOS MAIORES";
+        phaseTargets = getGameTargets(gameMode).majors; gameGrid.innerHTML = '';
         shuffle([...deck.major]).forEach((cardData) => {
             const backCard = document.createElement('div');
             backCard.className = 'back-card';
@@ -1846,31 +1902,14 @@
                     pickCardForSlot(phaseTargets[targetIndex], cardData, true);
                     targetIndex++;
                 }
-                while (targetIndex < phaseTargets.length && phaseTargets[targetIndex].getAttribute('data-card-name')) { targetIndex++; }
-                if (targetIndex >= phaseTargets.length) {
-                    setTimeout(() => {
-                        gameStatus.textContent = "EMBARALHANDO ARCANOS MENORES...";
-                        gameGrid.innerHTML = '<div class="shuffling-container"></div>';
-                        const sc = gameGrid.querySelector('.shuffling-container');
-                        for (let i = 0; i < 12; i++) {
-                            const c = document.createElement('div');
-                            c.className = 'back-card shuffling-card';
-                            c.style.animationDelay = `${i * 0.1}s`;
-                            sc.appendChild(c);
-                        }
-                        setTimeout(setupMinorsGamePhase, 2000);
-                    }, 400);
-                }
             };
             gameGrid.appendChild(backCard);
         });
     }
 
     function setupMinorsGamePhase() {
-        activePhase = 'minors'; targetIndex = 0;
-        gameStatus.textContent = "ESCOLHA OS ARCANOS MENORES";
-        phaseTargets = getGameTargets(gameMode).minors;
-        gameGrid.innerHTML = '';
+        activePhase = 'minors'; targetIndex = 0; gameStatus.textContent = "ESCOLHA OS ARCANOS MENORES";
+        phaseTargets = getGameTargets(gameMode).minors; gameGrid.innerHTML = '';
         shuffle([...deck.wands, ...deck.cups, ...deck.swords, ...deck.pentacles]).forEach((cardData) => {
             const backCard = document.createElement('div');
             backCard.className = 'back-card';
@@ -1882,8 +1921,6 @@
                     pickCardForSlot(phaseTargets[targetIndex], cardData, true);
                     targetIndex++;
                 }
-                while (targetIndex < phaseTargets.length && phaseTargets[targetIndex].getAttribute('data-card-name')) { targetIndex++; }
-                if (targetIndex >= phaseTargets.length) { triggerFinalReveal(); }
             };
             gameGrid.appendChild(backCard);
         });
@@ -1916,17 +1953,16 @@
         else { document.body.classList.add('hide-meanings'); btn.textContent = 'Ligar Significados'; }
     }
 
+    // MODIFICAÇÃO CHAVE AQUI: selectCard repassa o próprio elemento (this) para a leitura
     function selectCard(cardElement) {
         const savedName  = cardElement.getAttribute('data-card-name');
         const hasImage   = cardElement.style.backgroundImage && cardElement.style.backgroundImage !== '';
         const isFaceDown = cardElement.classList.contains('board-face-down');
-
         if ((savedName || hasImage) && !isFaceDown) {
             const imgUrl = cardElement.style.backgroundImage.replace(/url\(["']?|["']?\)/g, '');
-            openDetailModalDirect(savedName, imgUrl);
+            openDetailModalDirect(savedName, imgUrl, cardElement);
             return;
         }
-
         if (!savedName && !hasImage) {
             currentSelectedCard = cardElement;
             openCardModalForSlot(cardElement);
@@ -1954,10 +1990,7 @@
         }
     }
 
-    function openEncyclopedia() {
-        encyclopediaModal.style.display = 'flex';
-        filterEncyclopedia('major', document.querySelector('.enc-tab'));
-    }
+    function openEncyclopedia() { encyclopediaModal.style.display = 'flex'; filterEncyclopedia('major', document.querySelector('.enc-tab')); }
     function closeEncyclopedia() { encyclopediaModal.style.display = 'none'; }
 
     function filterEncyclopedia(type, btnElement) {
@@ -2033,33 +2066,50 @@
         detailModal.querySelector('.modal-content').scrollTop = 0;
     }
 
-    function openDetailModalDirect(name, imgUrl) {
+    // MODIFICAÇÃO CHAVE AQUI: Abertura do Modal de Detalhes suporta Templo de Afrodite
+    function openDetailModalDirect(name, imgUrl, slotElement = null) {
         document.getElementById('detailCardName').textContent = name || "Arcano Selecionado";
         document.getElementById('detailCardImg').src = imgUrl;
         switchMeaningTab('atributos');
 
         let cleanName = name ? name.replace(/^\d+\s*[-–]\s*/, "").trim() : "";
+        let verbs = ["Alinhamento","Fluxo","Sintonia"];
+        let themeLabel = "Palavras-Chave Gerais";
+        let showExtended = true; // Mostra atributos longos ou oculta no TA?
+        
+        if (gameMode === 'ta' && slotElement && slotElement.hasAttribute('data-ta-slot')) {
+            let slotNum = parseInt(slotElement.getAttribute('data-ta-slot'));
+            let theme = 'MENTAL';
+            if ([1, 2, 7, 8].includes(slotNum)) theme = 'MENTAL';
+            else if ([3, 4, 9, 10].includes(slotNum)) theme = 'SENTIMENTAL';
+            else if ([5, 6, 11, 12].includes(slotNum)) theme = 'MATERIAL';
+            else if ([13, 14].includes(slotNum)) theme = 'FUTURO';
 
-                let verbs = ["Alinhamento","Fluxo","Sintonia"];
-        const isFutebolOrOposicao = (gameMode === 'futebol' || gameMode === 'oposicaoScr');
+            themeLabel = `Templo de Afrodite - ${theme}`;
 
-        if (externalMeanings && externalMeanings[cleanName] && externalMeanings[cleanName].verbos && externalMeanings[cleanName].verbos.length > 0) {
-            verbs = externalMeanings[cleanName].verbos;
-        } else if (isFutebolOrOposicao && futebolVerbsMap[cleanName]) {
-            verbs = futebolVerbsMap[cleanName];
-        } else if (verbsMap[cleanName]) {
-            verbs = verbsMap[cleanName];
-        } else {
-            let targetMap = isFutebolOrOposicao ? futebolVerbsMap : verbsMap;
-            let found = false;
-            for (let key in targetMap) {
-                if (cleanName.toLowerCase() === key.toLowerCase() || (name && name.toLowerCase().includes(key.toLowerCase()))) {
-                    verbs = targetMap[key]; 
-                    found = true;
-                    break;
+            if (externalTaMeanings && externalTaMeanings[cleanName] && externalTaMeanings[cleanName][theme] && externalTaMeanings[cleanName][theme].length > 0) {
+                verbs = externalTaMeanings[cleanName][theme];
+                showExtended = false; // Em modo Templo, listamos direto os significados sem misturar
+            } else if (verbsMap[cleanName]) {
+                verbs = verbsMap[cleanName];
+            }
+        } 
+        else if (gameMode === 'futebol' || gameMode === 'futebolScr') {
+            if (futebolVerbsMap[cleanName]) verbs = futebolVerbsMap[cleanName];
+            else {
+                for (let key in futebolVerbsMap) {
+                    if (cleanName.toLowerCase() === key.toLowerCase() || (name && name.toLowerCase().includes(key.toLowerCase()))) {
+                        verbs = futebolVerbsMap[key]; break;
+                    }
                 }
             }
-            if (!found && isFutebolOrOposicao) {
+        } 
+        else if (externalMeanings && externalMeanings[cleanName] && externalMeanings[cleanName].verbos && externalMeanings[cleanName].verbos.length > 0) {
+            verbs = externalMeanings[cleanName].verbos;
+        } 
+        else {
+            if (verbsMap[cleanName]) verbs = verbsMap[cleanName];
+            else {
                 for (let key in verbsMap) {
                     if (cleanName.toLowerCase() === key.toLowerCase() || (name && name.toLowerCase().includes(key.toLowerCase()))) {
                         verbs = verbsMap[key]; break;
@@ -2068,6 +2118,7 @@
             }
         }
 
+        document.querySelector('.verb-box-title').textContent = themeLabel;
         document.getElementById('detailCardVerbs').textContent = verbs.join(', ');
 
         const extendedContainer = document.getElementById('detailExtendedText');
@@ -2077,7 +2128,14 @@
         const atributosExt = extSrc && extSrc.atributos;
         const situacao     = builtIn && builtIn.situacao;
 
-        if (atributosExt) {
+        // Limpa e estrutura a visualização da caixa de texto maior debaixo
+        if (gameMode === 'ta' && slotElement && slotElement.hasAttribute('data-ta-slot') && !showExtended) {
+             extendedContainer.innerHTML = `
+                <div style="line-height:1.7; color:var(--text-main);">
+                    <strong style="color:var(--gold-main); font-size:12px;">Todos Significados desta Casa:</strong><br><br>
+                    • ${verbs.join('<br>• ')}
+                </div>`;
+        } else if (atributosExt) {
             extendedContainer.innerHTML = `<div style="line-height:1.7;color:#e0e0e0;">${atributosExt.replace(/\n/g,'<br>')}</div>`;
         } else if (situacao) {
             extendedContainer.innerHTML = `<div><strong style="color:var(--gold-main);">Situação:</strong> <span style="color:var(--text-main);">${situacao}</span></div>`;
